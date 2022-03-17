@@ -1,0 +1,39 @@
+package Arrays;
+import java.util.*;
+public class dc17 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int start= sc.nextInt(),end=sc.nextInt();
+        ArrayList<Character> al=new ArrayList<>();
+        for(int i=start;i<=end;i++){
+            al.add(Character.forDigit(i,10));
+        }
+        ArrayList<Character> al1=new ArrayList<>();
+        al1.addAll(al);
+        System.out.println(al.toString().replace("[","").replace("]","").replace(",","").replace(" ",""));
+        for(int i=1;i<al.size()-1;i++){
+            al.set(i,al.get(i-1));
+            System.out.println(al.toString().replace("[","").replace("]","").replace(",","").replace(" ",""));
+        }
+        for(int i=al1.size()-2;i>=1;i--){
+            al1.set(i,al1.get(i+1));
+            System.out.println(al1.toString().replace("[","").replace("]","").replace(",","").replace(" ",""));
+        }
+
+    }
+}
+
+/*
+3 9
+3456789
+3356789
+3336789
+3333789
+3333389
+3333339
+3456799
+3456999
+3459999
+3499999
+3999999
+*/
