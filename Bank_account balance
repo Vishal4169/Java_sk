@@ -1,0 +1,71 @@
+package Arrays;
+
+/*
+10000 10 3 50 1000
+CASH 5000
+ATM 2000
+CARD 2400
+ATM 2000
+CHQW 2500
+ET 20000
+CASH 1200
+ATM 2500
+CARD 579
+ATM 5000
+
+30000 12 2 100 2000
+ATM 3000
+CASH 2000
+ATM 5000
+ET 10000
+ATM 3000
+ATM 2000
+MNT 100
+ATM 3000
+INT 200
+ATM 4000
+CARD 2000
+ET 12000
+ */
+import java.util.Scanner;
+
+public class bankAcc {
+    static int fun_cal(String mode,int amount,int initial,int AD,int Cd){
+        int sum=0;
+        if(mode.compareTo("CASH")==0 || mode.compareTo("ET")==0 || mode.compareTo("INT")==0 || mode.compareTo("CHQ")==0){
+            sum=initial+amount;
+        }
+        else if(mode.compareTo("ATM")==0 || mode.compareTo("CHQW")==0 || mode.compareTo("MNT")==0){
+             sum=initial-amount;
+        }
+        else if(mode.compareTo("CARD")==0){
+           int val1=initial-amount;
+            if(amount>Cd){
+                double val=amount*0.1 ;
+                sum=(int)val+val1;
+            }else {
+                sum=val1;
+            }
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String[] values=sc.nextLine().split(" ");
+        int Final_amount=Integer.parseInt(values[0]),n=Integer.parseInt(values[1]),other_atm=Integer.parseInt(values[2]);
+        int otherAtm_ded=Integer.parseInt(values[3]),card_ded=Integer.parseInt(values[4]);
+        int oth_atmcount=0;
+        for(int i=0;i<n;i++){
+            String[] tran=sc.nextLine().split(" ");
+
+            if(tran[0].compareTo("ATM")==0){
+                oth_atmcount++;
+            }
+            Final_amount=fun_cal(tran[0],Integer.parseInt(tran[1]),Final_amount,otherAtm_ded,card_ded);
+        }
+        int c=oth_atmcount-other_atm;
+        
+        if(oth_atmcount>other_atm)
+        System.out.println(Final_amount-c*otherAtm_ded);
+    }
+}
