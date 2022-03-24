@@ -1,0 +1,75 @@
+package Arrays;
+import java.util.*;
+
+/*
+6 9
+a b c l m n a b c
+d e f p q r d e f
+g h i x z y g h i
+c b a c b a n m l
+f e d f e d r q p
+i h g i h g y z x
+3
+ */
+/*
+4 4
+a b c d
+e f g h
+c d a b
+g h e f
+2
+ */
+public class dc_24 {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int r=sc.nextInt(),c=sc.nextInt();
+        char mat[][]=new char[r][c];
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                mat[i][j]=sc.next().charAt(0);
+            }
+        }
+        int k=sc.nextInt();
+        HashMap<String,Integer> all=new HashMap<>();
+        for(int i=0;i<=r-k;i+=k){
+            for(int j=0;j<=c-k;j+=k){
+                String st="";
+                for(int ii=i;ii<i+k;ii++){
+                    for(int jj=j;jj<j+k;jj++){
+                        st+=mat[ii][jj];
+                    }
+                }
+              if(all.containsKey(st)){
+                  int val=all.get(st);
+                  val++;
+                  all.replace(st,val);
+              }
+              else{
+                  all.put(st,1);
+              }
+            }
+        }
+        String str="";
+        for(String key:all.keySet()){
+            if(all.get(key)==1) {
+                str += key;
+                break;
+            }
+        }
+
+
+        int r1=0;
+        if(str.length()==0){
+            System.out.println(-1);
+        }
+        else {
+            for (int i = 0; i < k; i++) {
+                for (int j = 0; j < k; j++) {
+                    System.out.print(str.charAt(r1++) + " ");
+                }
+                System.out.println();
+            }
+        }
+
+    }
+}
