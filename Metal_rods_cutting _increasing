@@ -1,0 +1,54 @@
+package Dc;
+import java.util.*;
+/*
+4
+2 5 8 12
+
+5
+5 6 7 10 21
+
+7
+18 19 20 21 22 23 24
+ */
+public class rods_Cutting {
+        public static void main(String[] args) {
+            Scanner sc=new Scanner(System.in);
+            int n=sc.nextInt(),ind=0,sum=0,last=0;
+            ArrayList<Integer> al=new ArrayList<>();
+            for(int i=0;i<n;i++)  al.add(sc.nextInt());
+            int f=0;
+            for(int i=0;i<n-1;i++){
+                if(Math.abs(al.get(i)-al.get(i+1)) == 1){
+                    f++;
+                }
+                else{
+                    ind=i+1;
+                    break;
+                }
+            }
+            if(f==n-1){
+                ind=n;
+            }
+            for(int i=0;i<ind;i++){
+                System.out.print(al.get(i)+" ");
+                last=al.get(i);
+            }
+
+            for(int i=ind;i<n;i++){
+                sum+=al.get(i);
+            }
+            last=last+1;
+            int ch=0;
+            while(ch!=sum){
+                ch+=last;
+                if(ch>sum){
+                    break;
+                }
+                System.out.print(last+" ");
+                last++;
+
+            }
+
+        }
+    }
+
